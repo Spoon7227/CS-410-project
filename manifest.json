@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "Text Sentiment Highlighter",
+    "version": "1.0",
+    "description": "Highlight text based on sentiment analysis within a webpage.",
+    "permissions": ["activeTab", "scripting", "storage"],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "web_accessible_resources": [
+        {
+          "resources": ["sentimentstyle.css"],
+          "matches": ["<all_urls>"]
+        }
+      ]
+  }
+  
