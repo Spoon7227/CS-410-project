@@ -40,3 +40,7 @@ To install the extension:
 
 - `compendium-js`: An NLP library used for sentiment analysis.
 - Chrome Extension APIs: Used for message passing between content scripts, background service worker, and popup.
+
+## Contributer
+
+- Joseph Jang
