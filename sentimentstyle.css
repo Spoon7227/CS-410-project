@@ -1,7 +1,6 @@
 .censor {
     position: absolute;
-    background-color: #f33835; /* Solid color */
-    opacity: 1;
-    pointer-events: none; /* Allows clicking through the overlay */
+    opacity: 0.4;
+    pointer-events: none; 
     z-index: 9999; /* Ensure it's above other content */
 }

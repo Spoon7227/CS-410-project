@@ -13,25 +13,53 @@ function injectCSS(cssFileName) {
 
 injectCSS('sentimentstyle.css');
 
+// When the user selects text, send it to the popup
+document.addEventListener('mouseup', () => {
+    const selectedText = window.getSelection().toString().trim();
+    if (selectedText) {
+        chrome.runtime.sendMessage({action: "selectedText", text: selectedText});
+    }
+});
+
+// Listener for messages from the popup
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "analyzeSentiment") {
+        analyzeAndHighlightSelection();
+    }
+});
+
 function analyzeAndHighlightSelection() {
     const selection = window.getSelection();
     if (!selection.rangeCount) return; // No selection made
 
     const selectedText = selection.toString().trim();
     if (selectedText) {
-        console.log("Analyzing selected text: ", selectedText)
-
-
         // Analyze the sentiment of the selected text
-        const sentimentScore = analyzeSentiment(selectedText);
-        // If the sentiment is negative, apply the highlight
-        if (sentimentScore < 0) {
-            applyOverlayToSelection(selection);
+        const sentimentLabel = analyzeSentiment(selectedText);
+
+        // Apply different highlight based on sentiment
+        switch (sentimentLabel) {
+            case "negative":
+                applyOverlayToSelection(selection, "red");
+                chrome.runtime.sendMessage({ action: "analysisResult", result: {result: "negative", color: "red"} });
+                break;
+            case "positive":
+                applyOverlayToSelection(selection, "green");
+                chrome.runtime.sendMessage({ action: "analysisResult", result: {result: "positive", color: "green"} });
+                break;
+            case "mixed":
+                applyOverlayToSelection(selection, "orange");
+                chrome.runtime.sendMessage({ action: "analysisResult", result: {result: "mixed", color: "orange"} });
+                break;
+            case "neutral":
+                chrome.runtime.sendMessage({ action: "analysisResult", result: {result: "neutral", color: "white"} });
+                break;
+            default:
         }
     }
 }
 
-function applyOverlayToSelection(selection) {
+function applyOverlayToSelection(selection, color) {
     const range = selection.getRangeAt(0);
     const rect = range.getBoundingClientRect();
     const overlay = document.createElement('div');
@@ -44,21 +72,19 @@ function applyOverlayToSelection(selection) {
     overlay.style.left = `${rect.left + window.scrollX}px`;
     overlay.style.width = `${rect.width}px`;
     overlay.style.height = `${rect.height}px`;
+    overlay.style.backgroundColor = color;
 
     // Add the overlay to the body
     document.body.appendChild(overlay);
 }
 
+// Uses compendium-js library for sentiment analysis
 function analyzeSentiment(text) {
-    // Your sentiment analysis logic here
-    // Dummy return value for demonstration
-    return Math.random() * 2 - 1; // This should be replaced with actual sentiment analysis
+    result = compendium.analyse(text)[0]
+
+    console.log("Analyzed Text: " + text + "\n\nSentiment Label: " + result.profile.label, "\nSentiment Score: " + result.profile.sentiment);
+
+    return result.profile.label;
 }
 
-// Listener for messages from the popup
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "analyzeSentiment") {
-        console.log("?")
-        analyzeAndHighlightSelection();
-    }
-});
+

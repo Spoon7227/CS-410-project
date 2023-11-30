@@ -4,13 +4,16 @@
     "version": "1.0",
     "description": "Highlight text based on sentiment analysis within a webpage.",
     "permissions": ["activeTab", "scripting", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
     "action": {
       "default_popup": "popup.html"
     },
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": ["content.js"]
+        "js": ["bower_components/compendium/dist/compendium.minimal.js", "content.js"]
       }
     ],
     "web_accessible_resources": [

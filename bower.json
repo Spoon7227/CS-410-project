@@ -1,0 +1,13 @@
+{
+  "name": "CS-410-project",
+  "homepage": "https://github.com/Spoon7227/CS-410-project",
+  "authors": [
+    "josephjang <jyj3@illinois.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "compendium": "^0.0.32"
+  }
+}

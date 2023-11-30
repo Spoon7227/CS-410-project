@@ -8,4 +8,24 @@ button {
     padding: 10px;
     cursor: pointer;
 }
-  
+
+#selectedText {
+    color: black;     
+    background-color: #f0f0f0; 
+    padding: 10px;
+    margin: 10px 0;  
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    font-size: 14px; 
+    overflow: auto; 
+    max-height: 150px; 
+}
+
+#analysisResult {
+    color: black;     
+    padding: 10px;
+    margin: 10px 0;  
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    font-size: 14px; 
+}
