@@ -30,7 +30,7 @@ To install the extension:
 
 #### Running the Extension
 
-1. Navigate to any webpage.
+1. Navigate to any webpage and reload.
 2. Select a portion of text.
 3. Click on the extension icon in your browser toolbar.
 4. The popup will display the selected text and a button "Analyze Sentiment".
