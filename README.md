@@ -5,6 +5,10 @@
 
 **Text Sentiment Highlighter** is a Chrome extension designed to analyze and visually highlight the sentiment of selected text on any webpage. It determines the sentiment (positive, negative, neutral, or mixed) of the text that the user has selected, then applies a colored highlight (green, red, none, orange) on the selected text. This tool is useful for navigating web pages by quickly filtering and understanding textual content based on sentiments. This tool is particularly useful in social media feeds, news articles, blog posts, or any website where textual content and human conversations are prominent. 
 
+## Video Workflow Presentation
+
+[Software usage tutorial](https://drive.google.com/file/d/1KTwDJ4FuZ3LWzh2eRojVkHSj4UMUTp8C/view?usp=sharing)
+
 ## Implementation
 
 The extension is implemented using HTML, CSS, JavaScript, and utilizes `compendium-js` for the sentiment analysis part. It follows a standard Chrome extension structure:
